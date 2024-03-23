@@ -410,13 +410,13 @@ window.Game = (function () {
         this.state.currentStatus = Verdict.CONTINUE;
       }
 
-      // Запись времени начала игры и времени начала уровня.
-      this.state.levelStartTime = Date.now();
-      if (!this.state.startTime) {
-        this.state.startTime = this.state.levelStartTime;
-      }
-
       this._preloadImagesForLevel(function () {
+        // Запись времени начала игры и времени начала уровня.
+        this.state.levelStartTime = Date.now();
+        if (!this.state.startTime) {
+          this.state.startTime = this.state.levelStartTime;
+        }
+
         // Предварительная отрисовка игрового экрана.
         this.render();
 
