@@ -509,19 +509,17 @@ window.Game = (function () {
       var keys = Object.keys(SpriteMap);
       var imagesToGo = keys.length;
 
-      var self = this;
-
       var loadSprite = function (sprite) {
         var image = new Image(sprite.width, sprite.height);
         image.onload = function () {
           sprite.image = image;
           if (--imagesToGo === 0) {
-            self._imagesArePreloaded[self.level] = true;
+            this._imagesArePreloaded[this.level] = true;
             callback();
           }
-        };
+        }.bind(this);
         image.src = sprite.url;
-      };
+      }.bind(this);
 
       for (var i = 0; i < keys.length; i++) {
         loadSprite(SpriteMap[keys[i]]);
