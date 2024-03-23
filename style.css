@@ -1,4 +1,12 @@
-html {
+html, body {
   height: 100%;
   width: 100%;
+  margin: 0; 
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(0deg, #09f, #0cf);
+  box-sizing: border-box;
+  border-bottom: solid 20px #c60;
 }
