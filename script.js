@@ -7,6 +7,7 @@ window.GameConstants = {
       return movingLeft ? 2 : 5;
     }
   },
+
   Wizard: {
     speed: window.wizardSpeed || 2,
     width: window.wizardWidth || 61,
@@ -27,7 +28,7 @@ window.Game = (function () {
    * @const
    * @type {number}
    */
-  var HEIGHT = 300;
+  var HEIGHT = 400;
 
   /**
    * @const
