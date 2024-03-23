@@ -470,16 +470,16 @@ window.Game = (function () {
       var message;
       switch (this.state.currentStatus) {
         case Verdict.WIN:
-          message = 'Вы победили Газебо!\nУра!';
+          message = 'Вы победили Газебо! Ура!\nНажмите пробел для перезапуска';
           break;
         case Verdict.FAIL:
-          message = 'Вы проиграли!';
+          message = 'Время вышло!\nНажмите пробел чтобы начать сначала';
           break;
         case Verdict.PAUSE:
           message = 'Игра на паузе!\nНажмите Пробел, чтобы продолжить';
           break;
         case Verdict.INTRO:
-          message = 'Добро пожаловать!\nНажмите Пробел для начала игры';
+          message = 'У вас есть три минуты на игру.\nНажмите пробел чтобы начать';
           break;
       }
 
@@ -624,7 +624,7 @@ window.Game = (function () {
           },
 
           /**
-           * Игра прекращается если игрок продолжает играть в нее два часа подряд.
+           * Игра прекращается если игрок продолжает играть в нее три минуты подряд.
            * @param {Object} state
            * @return {Verdict}
            */
