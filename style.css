@@ -6,7 +6,15 @@ html, body {
 }
 
 body {
+  align-items: end;
   background: linear-gradient(0deg, #09f, #0cf);
   box-sizing: border-box;
   border-bottom: solid 20px #c60;
+  display: flex;
+  justify-content: center;
+}
+
+.demo {
+  height: 400px;
+  width: 700px;
 }
