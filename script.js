@@ -410,6 +410,8 @@ window.Game = (function () {
         this.state.currentStatus = Verdict.CONTINUE;
       }
 
+      this._drawMessage('Игра загружается...');
+
       this._preloadImagesForLevel(function () {
         // Запись времени начала игры и времени начала уровня.
         this.state.levelStartTime = Date.now();
