@@ -284,6 +284,32 @@ window.Game = (function () {
   };
 
   /**
+   * Отрисовывает на заданном канвасе с 2D контекстом облачко заданного размера
+   * @param {CanvasRenderingContext2D} ctx
+   * @param {number} x
+   * @param {number} y
+   * @param {number} width
+   * @param {number} height
+   */
+  var drawCloud = function (ctx, x, y, width, height) {
+    var offset = 10;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + offset, y + height / 2);
+    ctx.lineTo(x, y + height);
+    ctx.lineTo(x + width / 2, y + height - offset);
+    ctx.lineTo(x + width, y + height);
+    ctx.lineTo(x + width - offset, y + height / 2);
+    ctx.lineTo(x + width, y);
+    ctx.lineTo(x + width / 2, y + offset);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.fill();
+  };
+
+
+  /**
    * Конструктор объекта Game. Создает canvas, добавляет обработчики событий
    * и показывает приветственный экран.
    * @param {Element} container
@@ -460,37 +486,23 @@ window.Game = (function () {
       this._drawMessage(message);
     },
 
+    /**
+     * Отрисовка текстового сообщения на экране
+     * @param {string} message
+     */
     _drawMessage: function (message) {
-      var ctx = this.ctx;
+      this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+      drawCloud(this.ctx, 190, 40, 320, 100);
 
-      var drawCloud = function (x, y, width, heigth) {
-        var offset = 10;
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x + offset, y + heigth / 2);
-        ctx.lineTo(x, y + heigth);
-        ctx.lineTo(x + width / 2, y + heigth - offset);
-        ctx.lineTo(x + width, y + heigth);
-        ctx.lineTo(x + width - offset, y + heigth / 2);
-        ctx.lineTo(x + width, y);
-        ctx.lineTo(x + width / 2, y + offset);
-        ctx.lineTo(x, y);
-        ctx.stroke();
-        ctx.closePath();
-        ctx.fill();
-      };
+      this.ctx.fillStyle = 'rgba(256, 256, 256, 1.0)';
+      drawCloud(this.ctx, 180, 30, 320, 100);
 
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-      drawCloud(190, 40, 320, 100);
+      this.ctx.fillStyle = '#000';
+      this.ctx.font = '16px PT Mono';
 
-      ctx.fillStyle = 'rgba(256, 256, 256, 1.0)';
-      drawCloud(180, 30, 320, 100);
-
-      ctx.fillStyle = '#000';
-      ctx.font = '16px PT Mono';
       message.split('\n').forEach(function (line, i) {
-        ctx.fillText(line, 200, 80 + 20 * i);
-      });
+        this.ctx.fillText(line, 200, 80 + 20 * i);
+      }, this);
     },
 
     /**
