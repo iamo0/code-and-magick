@@ -1,27 +1,5 @@
 'use strict';
 
-window.GameConstants = {
-  Fireball: {
-    size: window.fireballSize || 24,
-    speed: window.getFireballSpeed || function (movingLeft) {
-      return movingLeft ? 2 : 5;
-    }
-  },
-
-  Wizard: {
-    speed: window.wizardSpeed || 2,
-    width: window.wizardWidth || 61,
-    getHeight: window.getWizardHeight || function (width) {
-      return 1.377 * width;
-    },
-    getX: window.getWizardX || function (width) {
-      return width / 3;
-    },
-    getY: window.getWizardY || function (height) {
-      return height - 100;
-    }
-  }
-};
 
 window.Game = (function () {
   /**
@@ -117,6 +95,30 @@ window.Game = (function () {
     height: 24,
     url: 'img/fireball.gif'
   };
+
+  var GameConstants = {
+    Fireball: {
+      size: window.fireballSize || 24,
+      speed: window.getFireballSpeed || function (movingLeft) {
+        return movingLeft ? 2 : 5;
+      }
+    },
+
+    Wizard: {
+      speed: window.wizardSpeed || 2,
+      width: window.wizardWidth || 61,
+      getHeight: window.getWizardHeight || function (width) {
+        return 1.377 * width;
+      },
+      getX: window.getWizardX || function (width) {
+        return width / 3;
+      },
+      getY: window.getWizardY || function (height) {
+        return height - 100;
+      }
+    }
+  };
+
 
   /**
    * Правила перерисовки объектов в зависимости от состояния игры.
@@ -267,14 +269,14 @@ window.Game = (function () {
         // уровне равна 2px за кадр.
         {
           direction: Direction.RIGHT,
-          height: window.GameConstants.Wizard.getHeight(window.GameConstants.Wizard.width),
-          speed: window.GameConstants.Wizard.speed,
+          height: GameConstants.Wizard.getHeight(GameConstants.Wizard.width),
+          speed: GameConstants.Wizard.speed,
           sprite: SpriteMap[ObjectType.ME],
           state: ObjectState.OK,
           type: ObjectType.ME,
-          width: window.GameConstants.Wizard.width,
-          x: window.GameConstants.Wizard.getX(WIDTH),
-          y: window.GameConstants.Wizard.getY(HEIGHT)
+          width: GameConstants.Wizard.width,
+          x: GameConstants.Wizard.getX(WIDTH),
+          y: GameConstants.Wizard.getY(HEIGHT)
         }
     );
 
@@ -542,12 +544,12 @@ window.Game = (function () {
       if (this.state.keysPressed.SHIFT) {
         this.state.objects.push({
           direction: me.direction,
-          height: window.GameConstants.Fireball.size,
-          speed: window.GameConstants.Fireball.speed(!!(me.direction & Direction.LEFT)),
+          height: GameConstants.Fireball.size,
+          speed: GameConstants.Fireball.speed(!!(me.direction & Direction.LEFT)),
           sprite: SpriteMap[ObjectType.FIREBALL],
           type: ObjectType.FIREBALL,
-          width: window.GameConstants.Fireball.size,
-          x: me.direction & Direction.RIGHT ? me.x + me.width : me.x - window.GameConstants.Fireball.size,
+          width: GameConstants.Fireball.size,
+          x: me.direction & Direction.RIGHT ? me.x + me.width : me.x - GameConstants.Fireball.size,
           y: me.y + me.height / 2
         });
 
