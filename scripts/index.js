@@ -80,7 +80,7 @@ window.Game = (function () {
     getInitialState: function () {
       return {
         // Статус игры. Если CONTINUE, то игра продолжается.
-        currentStatus: Verdict.CONTINUE,
+        currentStatus: Verdict.INTRO,
 
         // Объекты, удаленные на последнем кадре.
         garbage: [],
@@ -501,19 +501,9 @@ window.Game = (function () {
     }
   };
 
-  Game.Verdict = Verdict;
-
   var game = new Game(document.querySelector('.demo'));
 
-  window.restartGame = function (wizardRightImage, wizardLeftImage) {
-    SpriteMap[ObjectType.ME].url = wizardRightImage;
-    SpriteMap[ObjectType.ME + REVERSED].url = wizardLeftImage;
-
-    game.initializeLevelAndStart();
-    game.setGameStatus(Verdict.INTRO);
-  };
-
-  window.restartGame('img/wizard.gif', 'img/wizard-reversed.gif');
+  game.initializeLevelAndStart(true);
 
   return game;
 })();
