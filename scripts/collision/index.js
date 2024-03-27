@@ -33,12 +33,12 @@ const createGameObject = (
   y,
   width,
   height,
-  type = ObjectType.MULE,
-  sprite = null,
   direction = Direction.RIGHT | Direction.DOWN,
   xSpeed = 0,
   ySpeed = 0,
   state = ObjectState.OK,
+  sprite = null,
+  type = ObjectType.MULE,
 ) => ({
   type,
   state,
@@ -72,8 +72,20 @@ const objectsIntersect = (obj1, obj2) => {
 };
 
 
+const clamp = (val, min, max) => Math.min(max, Math.max(val, min));
+
+
+const updateObject = (obj1) => {
+  obj1.y = clamp(obj1.y - obj1.ySpeed, 0, Infinity);
+  return obj1;
+};
+
+
 export {
+  clamp,
   createGameObject,
+  Direction,
   objectsIntersect,
   objectsIntersectionRect,
+  updateObject,
 };
