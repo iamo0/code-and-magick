@@ -1,5 +1,3 @@
-import { clamp } from "./math";
-
 const ObjectType = {
   // NB! Mule is an empty object that allows to create any type of temporary
   // object on a map with either testing purposes or to create one-time objects
