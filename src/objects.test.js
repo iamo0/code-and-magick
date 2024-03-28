@@ -5,7 +5,7 @@ import {
   getObjectsIntersectionRect,
   ObjectsIntersectionType,
   updateObject,
-} from './game-objects';
+} from './objects';
 
 
 describe("Objects intersection", () => {
