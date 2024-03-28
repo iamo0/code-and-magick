@@ -169,12 +169,30 @@ describe("Objects intersection", () => {
         expect(intersectionType).toEqual(ObjectsIntersectionType.COLLIDE);
       });
       
-      test("Objects deep intersection is detected", () => {
+      test("Objects that partially intersect collide", () => {
+        const cluelessObject = createGameObject(0, 0, 10, 10);
+        const carelessObject = createGameObject(5, 0, 10, 10);
+        const intersectionType = getObjectsIntersectionType(cluelessObject, carelessObject);
+    
+        expect(intersectionType).toEqual(ObjectsIntersectionType.COLLIDE);
+      });
+    });
+
+    describe("One object is within the other", () => {
+      test("One object is within the other", () => {
         const penetratedObject = createGameObject(0, 0, 100, 100);
         const insertedObject = createGameObject(10, 10, 10, 10);
         const intersectionType = getObjectsIntersectionType(penetratedObject, insertedObject);
     
-        expect(intersectionType).toEqual(ObjectsIntersectionType.COLLIDE);
+        expect(intersectionType).toEqual(ObjectsIntersectionType.CONTAINS);
+      });
+
+      test("One object contains the other", () => {
+        const penetratedObject = createGameObject(0, 0, 100, 100);
+        const insertedObject = createGameObject(10, 10, 10, 10);
+        const intersectionType = getObjectsIntersectionType(insertedObject, penetratedObject);
+    
+        expect(intersectionType).toEqual(ObjectsIntersectionType.WITHIN);
       });
     });
   });
