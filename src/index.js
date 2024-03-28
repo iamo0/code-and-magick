@@ -1,4 +1,4 @@
-import { clamp } from "../math";
+import { clamp } from "./math";
 
 const ObjectType = {
   // NB! Mule is an empty object that allows to create any type of temporary
