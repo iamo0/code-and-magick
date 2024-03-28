@@ -1,3 +1,5 @@
+import { clamp } from "./math";
+
 const ObjectType = {
   // NB! Mule is an empty object that allows to create any type of temporary
   // object on a map with either testing purposes or to create one-time objects
@@ -98,6 +100,11 @@ const getObjectsIntersectionType = (obj1, obj2) => {
   return ObjectsIntersectionType.COLLIDE;
 };
 
+const updateObject = (obj1) => {
+  obj1.y = clamp(obj1.y - obj1.ySpeed, 0, Infinity);
+  return obj1;
+};
+
 
 export {
   createGameObject,
@@ -105,4 +112,5 @@ export {
   getObjectsIntersectionType,
   getObjectsIntersectionRect,
   ObjectsIntersectionType,
+  updateObject,
 };
