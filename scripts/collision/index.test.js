@@ -2,7 +2,7 @@ import {
   createGameObject,
   Direction,
   getObjectsIntersectionType,
-  objectsIntersectionRect,
+  getObjectsIntersectionRect,
   ObjectsIntersectionType,
   updateObject,
 } from './index';
@@ -15,7 +15,7 @@ describe("Objects intersection", () => {
         const obj1 = createGameObject(0, 0, 100, 100);
         const obj2 = createGameObject(75, 75, 100, 100);
     
-        expect(objectsIntersectionRect(obj1, obj2)).toEqual({
+        expect(getObjectsIntersectionRect(obj1, obj2)).toEqual({
           x: 75,
           y: 75,
           width: 25,
@@ -27,7 +27,7 @@ describe("Objects intersection", () => {
         const obj1 = createGameObject(75, 75, 100, 100);
         const obj2 = createGameObject(0, 0, 100, 100);
     
-        expect(objectsIntersectionRect(obj1, obj2)).toEqual({
+        expect(getObjectsIntersectionRect(obj1, obj2)).toEqual({
           x: 75,
           y: 75,
           width: 25,
@@ -39,7 +39,7 @@ describe("Objects intersection", () => {
         const obj1 = createGameObject(10, 10, 10, 10);
         const obj2 = createGameObject(0, 0, 100, 100);
     
-        expect(objectsIntersectionRect(obj1, obj2)).toEqual({
+        expect(getObjectsIntersectionRect(obj1, obj2)).toEqual({
           x: 10,
           y: 10,
           width: 10,
@@ -51,7 +51,7 @@ describe("Objects intersection", () => {
         const obj1 = createGameObject(0, 0, 100, 100);
         const obj2 = createGameObject(10, 10, 10, 10);
     
-        expect(objectsIntersectionRect(obj1, obj2)).toEqual({
+        expect(getObjectsIntersectionRect(obj1, obj2)).toEqual({
           x: 10,
           y: 10,
           width: 10,
@@ -65,7 +65,7 @@ describe("Objects intersection", () => {
         const obj1 = createGameObject(0, 0, 10, 10);
         const obj2 = createGameObject(20, 0, 10, 10);
     
-        expect(objectsIntersectionRect(obj1, obj2)).toEqual({
+        expect(getObjectsIntersectionRect(obj1, obj2)).toEqual({
           x: 20,
           y: 0,
           width: -10,
@@ -77,7 +77,7 @@ describe("Objects intersection", () => {
         const obj1 = createGameObject(0, 0, 10, 10);
         const obj2 = createGameObject(20, 0, 10, 10);
     
-        expect(objectsIntersectionRect(obj1, obj2)).toEqual({
+        expect(getObjectsIntersectionRect(obj1, obj2)).toEqual({
           x: 20,
           y: 0,
           width: -10,
@@ -89,7 +89,7 @@ describe("Objects intersection", () => {
         const obj1 = createGameObject(0, 20, 10, 10);
         const obj2 = createGameObject(0, 0, 10, 10);
     
-        expect(objectsIntersectionRect(obj1, obj2)).toEqual({
+        expect(getObjectsIntersectionRect(obj1, obj2)).toEqual({
           x: 0,
           y: 20,
           width: 10,
@@ -101,7 +101,7 @@ describe("Objects intersection", () => {
         const obj1 = createGameObject(0, 0, 10, 10);
         const obj2 = createGameObject(0, 20, 10, 10);
     
-        expect(objectsIntersectionRect(obj1, obj2)).toEqual({
+        expect(getObjectsIntersectionRect(obj1, obj2)).toEqual({
           x: 0,
           y: 20,
           width: 10,
@@ -113,7 +113,7 @@ describe("Objects intersection", () => {
         const obj1 = createGameObject(0, 0, 10, 10);
         const obj2 = createGameObject(20, 20, 10, 10);
     
-        expect(objectsIntersectionRect(obj1, obj2)).toEqual({
+        expect(getObjectsIntersectionRect(obj1, obj2)).toEqual({
           x: 20,
           y: 20,
           width: -10,
@@ -125,7 +125,7 @@ describe("Objects intersection", () => {
         const obj1 = createGameObject(20, 20, 10, 10);
         const obj2 = createGameObject(0, 0, 10, 10);
     
-        expect(objectsIntersectionRect(obj1, obj2)).toEqual({
+        expect(getObjectsIntersectionRect(obj1, obj2)).toEqual({
           x: 20,
           y: 20,
           width: -10,
@@ -136,7 +136,7 @@ describe("Objects intersection", () => {
   });
 
   describe("ObjectsIntersectionType", () => {
-    test("Returns NULL if objects doesn't intersect", () => {
+    test("Objects don't intersect", () => {
       const randomObject1 = createGameObject(10, 10, 10, 10);
       const randomObject2 = createGameObject(100, 100, 10, 10);
       const intersectionType = getObjectsIntersectionType(randomObject1, randomObject2);

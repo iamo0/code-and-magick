@@ -61,36 +61,24 @@ const createGameObject = (
 });
 
 
-const objectsIntersectionRect = (obj1, obj2) => {
-  const x = Math.max(obj1.x, obj2.x);
-  const y = Math.max(obj1.y, obj2.y);
-
-  const width = (
+const getObjectsIntersectionRect = (obj1, obj2) => ({
+  x: Math.max(obj1.x, obj2.x),
+  y: Math.max(obj1.y, obj2.y),
+  width: (
     Math.min(obj1.x + obj1.width, obj2.x + obj2.width) - 
     Math.max(obj2.x, obj1.x)
-  ); 
-  
-  const height = (
+  ),
+  height: (
     Math.min(obj1.y + obj1.height, obj2.y + obj2.height) - 
     Math.max(obj2.y, obj1.y)
-  ); 
-
-  return {
-    x,
-    y,
-    width,
-    height,
-  };
-};
+  ),
+});
 
 
 const getObjectsIntersectionType = (obj1, obj2) => {
-  const intersectionRect = objectsIntersectionRect(obj1, obj2);
+  const intersectionRect = getObjectsIntersectionRect(obj1, obj2);
 
-  if (
-    intersectionRect.width < 0 ||
-    intersectionRect.height < 0
-  ) {
+  if (intersectionRect.width < 0 || intersectionRect.height < 0) {
     return ObjectsIntersectionType.NULL;
   }
 
@@ -112,7 +100,7 @@ export {
   createGameObject,
   Direction,
   getObjectsIntersectionType,
-  objectsIntersectionRect,
+  getObjectsIntersectionRect,
   ObjectsIntersectionType,
   updateObject,
 };
