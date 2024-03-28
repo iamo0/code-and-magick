@@ -15,6 +15,12 @@ const ObjectState = {
   DISPOSED: 1,
 };
 
+const ObjectsIntersectionType = {
+  NULL: 0,
+  COLLIDE: 1,
+  ON_TOP: 2,
+};
+
 // NB!
 // Object always have a direction. In this example object is always moving.
 // On X axis object is always oriented either to left or to right. Right is
@@ -55,22 +61,44 @@ const createGameObject = (
 });
 
 
-const objectsIntersectionRect = (obj1, obj2) => ({
-  x: obj2.x - obj1.x,
-  y: obj2.y - obj1.y,
-  width: obj1.x + obj1.width - obj2.x,
-  height: obj1.y + obj1.height - obj2.y,
-});
+const objectsIntersectionRect = (obj1, obj2) => {
+  const x = Math.max(obj1.x, obj2.x);
+  const y = Math.max(obj1.y, obj2.y);
+
+  const width = (
+    Math.min(obj1.x + obj1.width, obj2.x + obj2.width) - 
+    Math.max(obj2.x, obj1.x)
+  ); 
+  
+  const height = (
+    Math.min(obj1.y + obj1.height, obj2.y + obj2.height) - 
+    Math.max(obj2.y, obj1.y)
+  ); 
+
+  return {
+    x,
+    y,
+    width,
+    height,
+  };
+};
 
 
-const objectsIntersect = (obj1, obj2) => {
+const getObjectsIntersectionType = (obj1, obj2) => {
   const intersectionRect = objectsIntersectionRect(obj1, obj2);
-  return (
-    intersectionRect.x >= 0 &&
-    intersectionRect.y >= 0 &&
-    intersectionRect.width >= 0 &&
-    intersectionRect.height >= 0
-  );
+
+  if (
+    intersectionRect.width < 0 ||
+    intersectionRect.height < 0
+  ) {
+    return ObjectsIntersectionType.NULL;
+  }
+
+  if (intersectionRect.width > 0 && obj1.y === obj2.y + obj2.height) {
+    return ObjectsIntersectionType.ON_TOP;
+  }
+  
+  return ObjectsIntersectionType.COLLIDE;
 };
 
 
@@ -83,7 +111,8 @@ const updateObject = (obj1) => {
 export {
   createGameObject,
   Direction,
-  objectsIntersect,
+  getObjectsIntersectionType,
   objectsIntersectionRect,
+  ObjectsIntersectionType,
   updateObject,
 };
