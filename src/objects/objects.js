@@ -98,6 +98,7 @@ const updateObject = (obj1) => {
 export {
   BaseGameObject,
   Direction,
+  GameObjectType,
   getObjectsIntersectionType,
   getObjectsIntersectionRect,
   ObjectsIntersectionType,

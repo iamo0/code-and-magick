@@ -1,4 +1,7 @@
-import { Direction } from "./objects";
+import { 
+  GameObjectType,
+  Direction,
+} from "./objects";
 
 const WIZARD_PARAMETERS = Object.seal({
   width: 61,
@@ -8,11 +11,17 @@ const WIZARD_PARAMETERS = Object.seal({
   type: GameObjectType.WIZARD,
 });
 
-const getWizardSprite = (direction = Direction.RIGHT) => Boolean(direction & Direction.RIGHT)
-  ? 'img/wizard.gif'
-  : 'img/wizard-reversed.gif';
+const WizardSprite = {
+  REGULAR: 'img/wizard.gif',
+  REVERSED: 'img/wizard-reversed.gif',
+};
+
+const getWizardSprite = (wizard) => Boolean(wizard.direction & Direction.LEFT)
+  ? WizardSprite.REVERSED
+  : WizardSprite.REGULAR;
 
 export {
   getWizardSprite,
   WIZARD_PARAMETERS,
+  WizardSprite,
 };
