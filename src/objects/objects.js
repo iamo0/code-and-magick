@@ -1,6 +1,6 @@
-import { clamp } from "./math";
+import { clamp } from "../math";
 
-const ObjectType = {
+const GameObjectType = {
   // NB! Mule is an empty object that allows to create any type of temporary
   // object on a map with either testing purposes or to create one-time objects
   MULE: 0,
@@ -48,7 +48,7 @@ const createGameObject = (
   ySpeed = 0,
   state = ObjectState.OK,
   sprite = null,
-  type = ObjectType.MULE,
+  type = GameObjectType.MULE,
 ) => ({
   type,
   state,
