@@ -38,28 +38,17 @@ const Direction = {
   UP: 0b10,
 };
 
-const createGameObject = (
-  x = 0,
-  y = 0,
-  width = 0,
-  height = 0,
-  direction = Direction.RIGHT | Direction.DOWN,
-  xSpeed = 0,
-  ySpeed = 0,
-  state = ObjectState.OK,
-  sprite = null,
-  type = GameObjectType.MULE,
-) => ({
-  type,
-  state,
-  x,
-  y,
-  width,
-  height,
-  direction,
-  xSpeed,
-  ySpeed,
-  sprite,
+const BaseGameObject = Object.seal({
+  x: 0,
+  y: 0,
+  width: 0,
+  height: 0,
+  direction: Direction.RIGHT | Direction.DOWN,
+  xSpeed: 0,
+  ySpeed: 0,
+  state: ObjectState.OK,
+  sprite: null,
+  type: GameObjectType.MULE,
 });
 
 
@@ -107,7 +96,7 @@ const updateObject = (obj1) => {
 
 
 export {
-  createGameObject,
+  BaseGameObject,
   Direction,
   getObjectsIntersectionType,
   getObjectsIntersectionRect,
