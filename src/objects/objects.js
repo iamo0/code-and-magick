@@ -44,8 +44,6 @@ const BaseGameObject = Object.seal({
   width: 0,
   height: 0,
   direction: Direction.RIGHT | Direction.DOWN,
-  xSpeed: 0,
-  ySpeed: 0,
   state: ObjectState.OK,
   sprite: null,
   type: GameObjectType.MULE,
@@ -89,11 +87,6 @@ const getObjectsIntersectionType = (obj1, obj2) => {
   return ObjectsIntersectionType.COLLIDE;
 };
 
-const updateObject = (obj1) => {
-  obj1.y = clamp(obj1.y - obj1.ySpeed, 0, Infinity);
-  return obj1;
-};
-
 
 export {
   BaseGameObject,
@@ -102,5 +95,4 @@ export {
   getObjectsIntersectionType,
   getObjectsIntersectionRect,
   ObjectsIntersectionType,
-  updateObject,
 };

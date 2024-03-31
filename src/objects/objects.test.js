@@ -1,10 +1,8 @@
 import { 
   BaseGameObject,
-  Direction,
   getObjectsIntersectionType,
   getObjectsIntersectionRect,
   ObjectsIntersectionType,
-  updateObject,
 } from "./objects";
 
 
@@ -425,49 +423,6 @@ describe("Objects intersection", () => {
     
         expect(intersectionType).toEqual(ObjectsIntersectionType.WITHIN);
       });
-    });
-  });
-});
-
-describe("Movement tests", () => {
-  describe("Gravity tests", () => {
-    test("Object moves down with its vertical speed when it's not staying on the ground", () => {
-      const initialObject = {
-        ...BaseGameObject,
-        x: 0,
-        y: 10,
-        width: 10,
-        height: 10,
-        ySpeed: 5,
-      };
-      
-      expect(updateObject(initialObject).y).toEqual(5);
-    });
-
-    test("Object doesn't move down if it stays on the ground (y = 0)", () => {
-      const initialObject = {
-        ...BaseGameObject,
-        x: 0,
-        y: 0,
-        width: 10,
-        height: 10,
-        ySpeed: 5,
-      };
-
-      expect(updateObject(initialObject).y).toEqual(0);
-    });
-
-    test("It is impossible for the object to fall below ground: negative Y coord is turned to 0", () => {
-      const initialObject = {
-        ...BaseGameObject,
-        x: 0,
-        y: -5,
-        width: 10,
-        height: 10,
-        ySpeed: 5,
-      };
-
-      expect(updateObject(initialObject).y).toEqual(0);
     });
   });
 });
