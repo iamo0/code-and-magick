@@ -54,3 +54,7 @@ const updateGame = (game) => {
     updateGame(game);
   }
 };
+
+export {
+  GameControls,
+};
