@@ -55,6 +55,29 @@ describe("Wizard sprite detection", () => {
 });
 
 describe("Wizard update function", () => {
+  describe("Null test", () => {
+    test("Nothing happens to wizard if there'no game controls pressed and it stays on the ground", () => {
+      const initialX = 0;
+      const initialY = 0;
+      const initialDirection = Direction.RIGHT;
+
+      const wizard = createWizard({
+        x: initialX,
+        y: initialY,
+        direction: initialDirection,
+      });
+
+      const initialSprite = wizard.sprite;
+
+      updateWizard(wizard, GameControls.NULL, null);
+
+      expect(wizard.x).toEqual(initialX);
+      expect(wizard.y).toEqual(initialY);
+      expect(wizard.direction).toEqual(initialDirection);
+      expect(wizard.sprite).toEqual(initialSprite);
+    });
+  });
+
   describe("Horizontal movement", () => {
     describe("Movement to right", () => {
       test("Wizard moves right if right button is being pressed", () => {
