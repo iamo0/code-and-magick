@@ -3,6 +3,7 @@ import {
   createWizard,
   getWizardSprite,
   WIZARD_PARAMETERS,
+  WizardSprite,
 } from "./objects-wizard";
 
 describe("Wizard constructor function", () => {
@@ -12,7 +13,7 @@ describe("Wizard constructor function", () => {
     expect(myWizard).toEqual({
       ...BaseGameObject,
       ...WIZARD_PARAMETERS,
-      sprite: 'img/wizard.gif',
+      sprite: WizardSprite.REGULAR,
     });
   });
 
@@ -23,44 +24,29 @@ describe("Wizard constructor function", () => {
 
     expect(myWizard.additionalProp).toEqual("Additional value");
   });
-});
 
-describe("Wizard sprite detection", () => {
-  test("Default sprite for wizard object is one that moves right", () => {
-    const myWizard = createWizard();
-
-    const sprite = getWizardSprite(myWizard);
-    expect(sprite).toEqual('img/wizard.gif');
-  });
-
-  test("If wizard explicitly moving right it's using correct sprite", () => {
-    const myWizard = {
-      ...BaseGameObject,
-      ...WIZARD_PARAMETERS,
-      direction: Direction.RIGHT,
-    };
-
-    const sprite = getWizardSprite(myWizard);
-    expect(sprite).toEqual('img/wizard.gif');
-  });
-
-  test("If wizard is moving left it's using correct sprite", () => {
-    const myWizard = {
-      ...BaseGameObject,
-      ...WIZARD_PARAMETERS,
-      direction: Direction.LEFT,
-    };
-
-    const sprite = getWizardSprite(myWizard);
-    expect(sprite).toEqual('img/wizard-reversed.gif');
-  });
-
-  test("If wizard is created with left direction as a default, it's created with correct sprite", () => {
+  test("If default direction is overridden with Direction.LEFT correct sprite is used", () => {
     const myWizard = createWizard({
       direction: Direction.LEFT,
     });
 
-    const sprite = getWizardSprite(myWizard);
-    expect(sprite).toEqual('img/wizard-reversed.gif');
+    expect(myWizard).toEqual({
+      ...BaseGameObject,
+      ...WIZARD_PARAMETERS,
+      direction: Direction.LEFT,
+      sprite: WizardSprite.REVERSED,
+    });
+  });
+});
+
+describe("Wizard sprite detection", () => {
+  test("If wizard explicitly moving right it's using correct sprite", () => {
+    const sprite = getWizardSprite(Direction.RIGHT);
+    expect(sprite).toEqual(WizardSprite.REGULAR);
+  });
+
+  test("If wizard is moving left it's using correct sprite", () => {
+    const sprite = getWizardSprite(Direction.LEFT);
+    expect(sprite).toEqual(WizardSprite.REVERSED);
   });
 });

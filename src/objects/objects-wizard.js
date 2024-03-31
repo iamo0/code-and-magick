@@ -16,7 +16,7 @@ const WIZARD_PARAMETERS = Object.seal({
 });
 
 
-const getWizardSprite = (wizard) => Boolean(wizard.direction & Direction.LEFT)
+const getWizardSprite = (direction) => Boolean(direction & Direction.LEFT)
   ? WizardSprite.REVERSED
   : WizardSprite.REGULAR;
 
