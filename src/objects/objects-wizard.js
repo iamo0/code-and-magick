@@ -62,13 +62,11 @@ const updateWizard = (wizard, controls, touchingObjects = null) => {
 
   // NB! Due to gravity, wizard constantly moving either up or down
   // if he's not on the ground or any other obstacle
-  if (Boolean(controls & GameControls.UP)) {
-    delta.y = WizardMovement.SPEED_UP;
-  } else {
+  delta.y = Boolean(controls & GameControls.UP)
+    ? WizardMovement.SPEED_UP
     // NB! Math.max and comparison with negative y here 
     // assumes that wizard's SPEED_DOWN is always is set below zero
-    delta.y = Math.max(-1 * wizard.y, WizardMovement.SPEED_DOWN);
-  }
+    : delta.y = Math.max(-1 * wizard.y, WizardMovement.SPEED_DOWN);
 
   wizard.x += delta.x;
   wizard.y += delta.y;
