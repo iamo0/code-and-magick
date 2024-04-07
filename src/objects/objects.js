@@ -10,10 +10,12 @@ const GameObjectType = {
   PLATFORM: 4,
 };
 
+
 const ObjectState = {
   OK: 0,
   DISPOSED: 1,
 };
+
 
 const ObjectsIntersectionType = {
   NULL: 0,
@@ -22,6 +24,7 @@ const ObjectsIntersectionType = {
   WITHIN: 3,
   CONTAINS: 4,
 };
+
 
 // NB!
 // Object always have a direction. In this example object is always moving.
@@ -32,11 +35,12 @@ const ObjectsIntersectionType = {
 // down due to gravity. If it stays on a surface it's falling on this surface.
 const Direction = {
   // NB! RIGHT and DOWN masks are given to enable testing of all directions
+  UP:    0b10,
   RIGHT: 0b00,
-  DOWN: 0b00,
-  LEFT: 0b01,
-  UP: 0b10,
+  DOWN:  0b00,
+  LEFT:  0b01,
 };
+
 
 const BaseGameObject = Object.seal({
   x: 0,

@@ -7,16 +7,6 @@ const GameStatus = {
 };
 
 
-const createLevel = () => ({
-  garbage: [],
-  objects: [],
-  objectives: new Set([
-    [GameStatus.WIN, (objects, garbage) => {}],
-    [GameStatus.LOOSE, (objects, garbage) => {}],
-  ]),
-});
-
-
 const GameControls = {
   NULL:  0b000000,
   UP:    0b000001,
@@ -57,4 +47,5 @@ const updateGame = (game) => {
 
 export {
   GameControls,
+  GameStatus,
 };

@@ -6,16 +6,19 @@ import {
   Direction,
 } from "./objects";
 
+
 const WizardSprite = {
   REGULAR: 'img/wizard.gif',
   REVERSED: 'img/wizard-reversed.gif',
 };
+
 
 const WIZARD_PARAMETERS = Object.seal({
   width: 61,
   height: 84,
   type: GameObjectType.WIZARD,
 });
+
 
 const WizardMovement = {
   SPEED_LEFT: -5,
@@ -43,7 +46,7 @@ const createWizard = (extendedParameters) => {
 };
 
 
-const updateWizard = (wizard, controls, touchingObjects = null) => {
+const updateWizard = (wizard, controls, _touchingObjects = null) => {
   const delta = {
     x: 0,
     y: 0,
