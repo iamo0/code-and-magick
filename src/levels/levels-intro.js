@@ -36,9 +36,11 @@ const IntroLevelObject = Object.seal({
     // Level is won when wizard successfully managed 
     // to hit a fence with fireball
     [GameStatus.WIN, (objects, _garbage) => {
-      const fb = objects.find((it) => it.type === GameObjectType.FIREBALL);
+      const fireballs = objects.filter(
+        (it) => it.type === GameObjectType.FIREBALL
+      );
 
-      if (fb === undefined) {
+      if (fireballs.length === 0) {
         return false;
       }
 
@@ -48,19 +50,30 @@ const IntroLevelObject = Object.seal({
         throw new Error("There should be a fence on a map");
       }
 
-      const intersectionType = getObjectsIntersectionType(fb, fence);
-
-      return new Set([
+      const intersections = new Set([
         ObjectsIntersectionType.COLLIDE,
         ObjectsIntersectionType.WITHIN,
-      ]).has(intersectionType);
+      ]);
+
+
+      for (const fb of fireballs) {
+        const intersectionType = getObjectsIntersectionType(fb, fence);
+
+        if (intersections.has(intersectionType)) {
+          return true;
+        }
+      }
+
+      return false;
     }],
     
     // Level is lost when fireball hits wizard
     [GameStatus.LOOSE, (objects, _garbage) => {
-      const fb = objects.find((it) => it.type === GameObjectType.FIREBALL);
+      const fireballs = objects.filter(
+        (it) => it.type === GameObjectType.FIREBALL
+      );
 
-      if (fb === undefined) {
+      if (fireballs.length === 0) {
         return false;
       }
 
@@ -70,12 +83,20 @@ const IntroLevelObject = Object.seal({
         throw new Error("There should be a wizard on a map");
       }
 
-      const intersectionType = getObjectsIntersectionType(fb, me);
-
-      return new Set([
+      const intersections = new Set([
         ObjectsIntersectionType.COLLIDE,
         ObjectsIntersectionType.WITHIN,
-      ]).has(intersectionType);
+      ]);
+
+      for (const fb of fireballs) {
+        const intersectionType = getObjectsIntersectionType(fb, me);
+
+        if (intersections.has(intersectionType)) {
+          return true;
+        }
+      }
+
+      return false;
     }],
   ]),
 });
